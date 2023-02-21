@@ -3,17 +3,24 @@ import { ICard } from "../../types";
 
 interface CardProps extends ICard {
   onPickCard: () => void;
+  isDisabled: boolean;
 }
 
-const Card = ({ emoji, isGuessed, isPicked, onPickCard }: CardProps) => {
+const Card = ({
+  emoji,
+  isGuessed,
+  isPicked,
+  isDisabled,
+  onPickCard,
+}: CardProps) => {
   return (
     <button
       type="button"
       className={s.card}
       onClick={onPickCard}
-      disabled={isGuessed || isPicked}
+      disabled={isGuessed || isPicked || isDisabled}
     >
-      {isGuessed || isPicked ? emoji : "X"}
+      {isGuessed || isPicked ? emoji : ""}
     </button>
   );
 };
