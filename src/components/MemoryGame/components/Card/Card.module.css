@@ -1,0 +1,14 @@
+.card {
+  cursor: pointer;
+  border: none;
+  aspect-ratio: 1 / 1;
+  font-size: 5rem;
+  background-color: white;
+  padding: 0;
+}
+
+.card:disabled {
+  cursor: not-allowed;
+  background-color: white;
+  color: white;
+}
