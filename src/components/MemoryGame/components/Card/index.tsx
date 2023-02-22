@@ -1,4 +1,4 @@
-import s from "./Card.module.css";
+import s from "./Card.module.scss";
 import { ICard } from "../../types";
 
 interface CardProps extends ICard {

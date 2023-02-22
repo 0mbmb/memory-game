@@ -1,5 +1,5 @@
 import Card from "./components/Card";
-import s from "./MemoryGame.module.css";
+import s from "./MemoryGame.module.scss";
 import useMemoryGame from "./useMemoryGame";
 import Overlay from "./components/Overlay";
 

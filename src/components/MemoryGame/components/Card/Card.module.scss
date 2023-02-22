@@ -5,10 +5,10 @@
   font-size: 5rem;
   background-color: white;
   padding: 0;
-}
 
-.card:disabled {
-  cursor: not-allowed;
-  background-color: white;
-  color: white;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: white;
+    color: white;
+  }
 }

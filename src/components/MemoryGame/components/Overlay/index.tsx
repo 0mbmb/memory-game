@@ -1,4 +1,4 @@
-import s from "./Overlay.module.css";
+import s from "./Overlay.module.scss";
 import { ReactNode } from "react";
 
 interface OverlayProps {
