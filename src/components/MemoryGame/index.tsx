@@ -58,10 +58,8 @@ const MemoryGame = () => {
         )}
         {isGameWon && (
           <Overlay>
-            <p>Moves: {move}</p>
-            <button type="button" onClick={resetGame}>
-              Reset
-            </button>
+            <p className={s.wonMessage}>You won in {move} moves!</p>
+            <Button onClick={resetGame}>Reset</Button>
           </Overlay>
         )}
         {cards.map(({ emoji, isGuessed, isPicked }, index) => (

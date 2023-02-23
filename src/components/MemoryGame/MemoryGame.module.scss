@@ -41,3 +41,24 @@
     border-radius: calc(var(--grid-step) * 5);
   }
 }
+
+.wonMessage {
+  font-size: 1rem;
+  margin-bottom: calc(var(--grid-step) * 3);
+
+  @include media-xs {
+    font-size: 2rem;
+  }
+
+  @include media-s {
+    font-size: 2.5rem;
+  }
+
+  @include media-m {
+    font-size: 3rem;
+  }
+
+  @include media-l {
+    font-size: 4rem;
+  }
+}

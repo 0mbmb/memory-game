@@ -6,7 +6,11 @@ interface OverlayProps {
 }
 
 const Overlay = ({ children }: OverlayProps) => {
-  return <div className={s.overlay}>{children}</div>;
+  return (
+    <div className={s.overlay}>
+      <div className={s.content}>{children}</div>
+    </div>
+  );
 };
 
 export default Overlay;

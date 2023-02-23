@@ -29,3 +29,11 @@
     padding: calc(var(--grid-step) * 9);
   }
 }
+
+.content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
