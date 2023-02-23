@@ -1,0 +1,19 @@
+@import "../../styles/_mixins.scss";
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 calc(var(--grid-step) * 3);
+
+  @include media-s {
+    padding: 0 calc(var(--grid-step) * 4);
+  }
+
+  @include media-m {
+    padding: 0 calc(var(--grid-step) * 5);
+  }
+
+  @include media-l {
+    padding: 0 calc(var(--grid-step) * 6);
+  }
+}

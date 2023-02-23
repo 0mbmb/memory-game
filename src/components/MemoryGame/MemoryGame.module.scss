@@ -1,12 +1,43 @@
+@import "../../styles/mixins";
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: calc(var(--grid-step) * 3);
+}
+
 .board {
   display: grid;
-  padding: 10px;
-  gap: 10px;
-  background-color: bisque;
+  padding: calc(var(--grid-step) * 2);
+  gap: calc(var(--grid-step) * 2);
+  background: var(--gradient-board);
   position: relative;
+  border-radius: calc(var(--grid-step) * 1);
+  overflow: hidden;
 
-  @media screen and (min-width: 768px) {
-    padding: 20px;
-    gap: 20px;
+  @include media-xs {
+    padding: calc(var(--grid-step) * 3);
+    gap: calc(var(--grid-step) * 3);
+    border-radius: calc(var(--grid-step) * 2);
+  }
+
+  @include media-s {
+    padding: calc(var(--grid-step) * 4);
+    gap: calc(var(--grid-step) * 4);
+    border-radius: calc(var(--grid-step) * 3);
+  }
+
+  @include media-m {
+    padding: calc(var(--grid-step) * 7);
+    gap: calc(var(--grid-step) * 7);
+    border-radius: calc(var(--grid-step) * 4);
+  }
+
+  @include media-l {
+    padding: calc(var(--grid-step) * 9);
+    gap: calc(var(--grid-step) * 9);
+    border-radius: calc(var(--grid-step) * 5);
   }
 }

@@ -1,7 +1,31 @@
+@import "../../../../styles/mixins";
+
 .overlay {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
+
+  background-color: var(--color-overlay-bg);
+  color: var(--color-text-light);
+
+  padding: calc(var(--grid-step) * 2);
+
+  @include media-xs {
+    padding: calc(var(--grid-step) * 3);
+  }
+
+  @include media-s {
+    padding: calc(var(--grid-step) * 4);
+  }
+
+  @include media-m {
+    padding: calc(var(--grid-step) * 7);
+  }
+
+  @include media-l {
+    padding: calc(var(--grid-step) * 9);
+  }
 }
