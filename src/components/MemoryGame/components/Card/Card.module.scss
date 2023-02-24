@@ -4,11 +4,15 @@
   cursor: pointer;
   border: none;
   aspect-ratio: 1 / 1;
-  font-size: 1.5rem;
+  font-size: 2.5em;
   background-color: var(--color-card-cover);
   padding: 0;
 
-  border-radius: calc(var(--grid-step) * 1);
+  border-radius: 0.2em;
+
+  @include media-xxs {
+    font-size: 4em;
+  }
 
   &:disabled {
     cursor: not-allowed;
@@ -16,27 +20,44 @@
     color: white;
   }
 
-  @include media-xs {
-    font-size: 3rem;
+  &Picked {
+    animation: card-picked 0.15s ease forwards;
 
-    border-radius: calc(var(--grid-step) * 2);
+    span {
+      animation: emoji-picked 0.15s ease forwards;
+    }
   }
+}
 
-  @include media-s {
-    font-size: 4rem;
-
-    border-radius: calc(var(--grid-step) * 3);
+@keyframes card-picked {
+  0% {
+    background-color: var(--color-card-cover);
+    transform: scale(1) rotateY(0deg);
   }
-
-  @include media-m {
-    font-size: 5rem;
-
-    border-radius: calc(var(--grid-step) * 4);
+  49% {
+    background-color: var(--color-card-cover);
+    transform: scale(1.2) rotateY(90deg);
   }
+  50% {
+    background-color: var(--color-card-picked);
+  }
+  100% {
+    background-color: var(--color-card-picked);
+    transform: scale(1) rotateY(0deg);
+  }
+}
 
-  @include media-l {
-    font-size: 6rem;
-
-    border-radius: calc(var(--grid-step) * 5);
+@keyframes emoji-picked {
+  0% {
+    opacity: 0;
+  }
+  49% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
   }
 }

@@ -16,11 +16,11 @@ const Card = ({
   return (
     <button
       type="button"
-      className={s.card}
+      className={`${s.card} ${(isPicked || isGuessed) && s.cardPicked}`}
       onClick={onPickCard}
       disabled={isGuessed || isPicked || isDisabled}
     >
-      {isGuessed || isPicked ? emoji : ""}
+      <span>{isGuessed || isPicked ? emoji : ""}</span>
     </button>
   );
 };
