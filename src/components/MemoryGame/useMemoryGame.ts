@@ -4,6 +4,8 @@ import { getRandom, shuffleArray } from "./utils";
 import emojis from "./emojis";
 import { IGameMode } from "./types";
 
+const NEXT_MOVE_DELAY = 500;
+
 const useMemoryGame = ({ cardsNumber = 6, gameMode = IGameMode.NORMAL }) => {
   const getRandomCards = useCallback(() => {
     const randomEmojis = getRandom(emojis, Math.floor(cardsNumber / 2));
@@ -72,7 +74,7 @@ const useMemoryGame = ({ cardsNumber = 6, gameMode = IGameMode.NORMAL }) => {
         setTimeout(() => {
           resetPickedCards();
           setIsDisabled(false);
-        }, 500);
+        }, NEXT_MOVE_DELAY);
       }
     } else {
       setIsDisabled(false);
@@ -87,19 +89,19 @@ const useMemoryGame = ({ cardsNumber = 6, gameMode = IGameMode.NORMAL }) => {
         0
       );
       if (guessedCardsNumber === cards.length) {
-        setIsGameWon(true);
+        setTimeout(() => {
+          setIsGameWon(true);
+        }, NEXT_MOVE_DELAY);
       }
     } else {
       // Hardcore
-      const pickedCardsNumber = cards.reduce(
-        (acc, { isPicked }) => (isPicked ? acc + 1 : acc),
-        0
-      );
-      if (pickedCardsNumber === cards.length) {
-        setIsGameWon(true);
+      if (pickedCards.length === cards.length) {
+        setTimeout(() => {
+          setIsGameWon(true);
+        }, NEXT_MOVE_DELAY);
       }
     }
-  }, [cards, gameMode]);
+  }, [cards, gameMode, pickedCards]);
 
   return {
     cards,
