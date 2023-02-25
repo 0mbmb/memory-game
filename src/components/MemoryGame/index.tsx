@@ -3,7 +3,7 @@ import s from "./MemoryGame.module.scss";
 import useMemoryGame from "./useMemoryGame";
 import Overlay from "./components/Overlay";
 import Button from "./components/Button";
-import Switch from "./components/Switch";
+// import Switch from "./components/Switch";
 import "./styles.scss";
 
 import { useState } from "react";
@@ -49,37 +49,32 @@ const MemoryGame = () => {
           gridTemplateColumns: `repeat(4, 1fr)`,
         }}
       >
-        {isNewGame && (
-          <Overlay>
-            <p className={s.newMessage}>Choose field size:</p>
-            <ul className={s.newButtons}>
-              {cardsNumberOptions.map((option) => (
-                <li>
-                  <Button
-                    key={option}
-                    type="button"
-                    onClick={() => {
-                      onFieldSizeChoose(option);
-                    }}
-                  >
-                    {option}
-                  </Button>
-                </li>
-              ))}
-            </ul>
-            <p className={s.newMessage}>Difficulty:</p>
-            <Switch leftText="Normal" rightText="Hardcore" />
-          </Overlay>
-        )}
-        {isGameWon && (
-          <Overlay>
-            <p className={s.wonMessage}>You won in {move} moves!</p>
-            <div className={s.wonButtons}>
-              <Button onClick={resetGame}>Reset</Button>
-              <Button onClick={onNewGame}>New game</Button>
-            </div>
-          </Overlay>
-        )}
+        <Overlay isVisible={isNewGame}>
+          <p className={s.newMessage}>Choose field size:</p>
+          <ul className={s.newButtons}>
+            {cardsNumberOptions.map((option) => (
+              <li key={option}>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    onFieldSizeChoose(option);
+                  }}
+                >
+                  {option}
+                </Button>
+              </li>
+            ))}
+          </ul>
+          {/* <p className={s.newMessage}>Difficulty:</p>
+          <Switch leftText="Normal" rightText="Hardcore" /> */}
+        </Overlay>
+        <Overlay isVisible={isGameWon}>
+          <p className={s.wonMessage}>You won in {move} moves!</p>
+          <div className={s.wonButtons}>
+            <Button onClick={onNewGame}>New game</Button>
+            <Button onClick={resetGame}>Reset</Button>
+          </div>
+        </Overlay>
         {cards.map(({ emoji, isGuessed, isPicked }, index) => (
           <Card
             key={`${emoji}-${index}`}

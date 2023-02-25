@@ -7,6 +7,7 @@
   font-size: 2.5em;
   background-color: var(--color-card-cover);
   padding: 0;
+  transition: transform 200ms ease;
 
   border-radius: 0.2em;
 
@@ -20,16 +21,46 @@
     color: white;
   }
 
-  &Picked {
-    animation: card-picked 0.15s ease forwards;
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      transform: scale(1.03);
+    }
+  }
 
+  span {
+    opacity: 0;
+  }
+}
+
+.enter {
+  animation: card 0.2s ease forwards;
+  span {
+    animation: emoji 0.2s ease forwards;
+  }
+
+  &Done {
+    background-color: var(--color-card-picked) !important;
     span {
-      animation: emoji-picked 0.15s ease forwards;
+      opacity: 1;
     }
   }
 }
 
-@keyframes card-picked {
+.exit {
+  animation: card 0.2s ease forwards reverse;
+  span {
+    animation: emoji 0.2s ease forwards reverse;
+  }
+  &Done {
+    background-color: var(--color-card-cover) !important;
+    span {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes card {
   0% {
     background-color: var(--color-card-cover);
     transform: scale(1) rotateY(0deg);
@@ -47,7 +78,7 @@
   }
 }
 
-@keyframes emoji-picked {
+@keyframes emoji {
   0% {
     opacity: 0;
   }

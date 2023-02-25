@@ -9,13 +9,25 @@
 
   padding: 0.5em 1.2em;
 
+  transition: background-color ease 200ms;
+
   &--light {
-    color: var(--color-text);
-    background-color: var(--color-text-light);
+    color: var(--color-button-text-light);
+    background-color: var(--color-button-bg-light);
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-button-bg-light-hover);
+    }
   }
 
   &--dark {
-    color: var(--color-text-light);
-    background-color: var(--color-text);
+    color: var(--color-button-text-dark);
+    background-color: var(--color-button-bg-dark);
+
+    &:hover,
+    :focus {
+      background-color: var(--color-button-bg-dark-hover);
+    }
   }
 }

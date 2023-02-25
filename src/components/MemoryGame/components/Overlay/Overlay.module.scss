@@ -37,3 +37,25 @@
   flex-direction: column;
   align-items: center;
 }
+
+.enter {
+  opacity: 0;
+  &Active {
+    opacity: 1;
+    transition: opacity ease 200ms;
+  }
+  &Done {
+    opacity: 1;
+  }
+}
+
+.exit {
+  opacity: 1;
+  &Active {
+    opacity: 0;
+    transition: opacity ease 200ms;
+  }
+  &Done {
+    opacity: 0;
+  }
+}
