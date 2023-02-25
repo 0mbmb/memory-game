@@ -2,8 +2,9 @@ import { useEffect, useState, useCallback } from "react";
 import { ICard } from "./types";
 import { getRandom, shuffleArray } from "./utils";
 import emojis from "./emojis";
+import { IGameMode } from "./types";
 
-const useMemoryGame = ({ cardsNumber = 6 }) => {
+const useMemoryGame = ({ cardsNumber = 6, gameMode = IGameMode.NORMAL }) => {
   const getRandomCards = useCallback(() => {
     const randomEmojis = getRandom(emojis, Math.floor(cardsNumber / 2));
     return shuffleArray([...randomEmojis, ...randomEmojis]).map((i) => ({
@@ -14,6 +15,7 @@ const useMemoryGame = ({ cardsNumber = 6 }) => {
   }, [cardsNumber]);
 
   const [cards, setCards] = useState<ICard[]>(getRandomCards());
+  const [pickedCards, setPickedCards] = useState<ICard[]>([]);
   const [move, setMove] = useState<number>(0);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isGameWon, setIsGameWon] = useState(false);
@@ -24,6 +26,7 @@ const useMemoryGame = ({ cardsNumber = 6 }) => {
         i === index ? { ...card, isPicked: true } : { ...card }
       )
     );
+    setPickedCards([...pickedCards, cards[index]]);
     setMove(move + 1);
   };
 
@@ -31,14 +34,16 @@ const useMemoryGame = ({ cardsNumber = 6 }) => {
     setMove(0);
     setIsGameWon(false);
     setCards(getRandomCards());
+    setPickedCards([]);
   }, [getRandomCards]);
 
   useEffect(() => {
     resetGame();
   }, [resetGame]);
 
-  const resetPickedIcons = useCallback(() => {
+  const resetPickedCards = useCallback(() => {
     setCards(cards.map((card) => ({ ...card, isPicked: false })));
+    setPickedCards([]);
   }, [cards]);
 
   const makePickedGuessed = useCallback(() => {
@@ -49,36 +54,67 @@ const useMemoryGame = ({ cardsNumber = 6 }) => {
           : { ...card }
       )
     );
+    setPickedCards([]);
   }, [cards]);
 
   useEffect(() => {
     setIsDisabled(true);
-    const pickedCards = cards.filter((card) => card.isPicked === true);
-
-    if (pickedCards.length === 2) {
-      setTimeout(() => {
+    if (gameMode === IGameMode.NORMAL) {
+      // Normal
+      if (pickedCards.length === 2) {
         if (pickedCards[0].emoji === pickedCards[1].emoji) {
           makePickedGuessed();
           setIsDisabled(false);
         } else {
-          resetPickedIcons();
-          setIsDisabled(false);
+          setTimeout(() => {
+            resetPickedCards();
+            setIsDisabled(false);
+          }, 500);
         }
-      }, 500);
+      } else {
+        setIsDisabled(false);
+      }
     } else {
-      setIsDisabled(false);
+      // Hardcore
+      if (pickedCards.length >= 2 && pickedCards.length % 2 === 0) {
+        if (
+          pickedCards[pickedCards.length - 2].emoji ===
+          pickedCards[pickedCards.length - 1].emoji
+        ) {
+          setIsDisabled(false);
+        } else {
+          setTimeout(() => {
+            resetPickedCards();
+            setIsDisabled(false);
+          }, 500);
+        }
+      } else {
+        setIsDisabled(false);
+      }
     }
-  }, [cards, makePickedGuessed, resetPickedIcons]);
+  }, [gameMode, makePickedGuessed, pickedCards, resetPickedCards]);
 
   useEffect(() => {
-    const guessedCardsNumber = cards.reduce(
-      (acc, { isGuessed }) => (isGuessed ? acc + 1 : acc),
-      0
-    );
-    if (guessedCardsNumber === cards.length) {
-      setIsGameWon(true);
+    if (gameMode === IGameMode.NORMAL) {
+      // Normal
+      const guessedCardsNumber = cards.reduce(
+        (acc, { isGuessed }) => (isGuessed ? acc + 1 : acc),
+        0
+      );
+      if (guessedCardsNumber === cards.length) {
+        setIsGameWon(true);
+      }
+    } else {
+      // Hardcore
+      const pickedCardsNumber = cards.reduce(
+        (acc, { isPicked }) => (isPicked ? acc + 1 : acc),
+        0
+      );
+      if (pickedCardsNumber === cards.length) {
+        setIsGameWon(true);
+      }
     }
-  }, [cards]);
+  }, [cards, gameMode]);
 
   return {
     cards,

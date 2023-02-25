@@ -19,7 +19,7 @@ const MemoryGame = () => {
   const [isNewGame, setIsNewGame] = useState(true);
 
   const { cards, onPickCard, isDisabled, isGameWon, resetGame, move } =
-    useMemoryGame({ cardsNumber });
+    useMemoryGame({ cardsNumber, gameMode });
 
   const onFieldSizeChoose = (cardsNum: number) => {
     setCardsNumber(cardsNum);
