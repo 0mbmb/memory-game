@@ -59,38 +59,23 @@ const useMemoryGame = ({ cardsNumber = 6, gameMode = IGameMode.NORMAL }) => {
 
   useEffect(() => {
     setIsDisabled(true);
-    if (gameMode === IGameMode.NORMAL) {
-      // Normal
-      if (pickedCards.length === 2) {
-        if (pickedCards[0].emoji === pickedCards[1].emoji) {
+    if (pickedCards.length !== 0 && pickedCards.length % 2 === 0) {
+      if (
+        pickedCards[pickedCards.length - 2].emoji ===
+        pickedCards[pickedCards.length - 1].emoji
+      ) {
+        if (gameMode === IGameMode.NORMAL) {
           makePickedGuessed();
-          setIsDisabled(false);
-        } else {
-          setTimeout(() => {
-            resetPickedCards();
-            setIsDisabled(false);
-          }, 500);
         }
-      } else {
         setIsDisabled(false);
+      } else {
+        setTimeout(() => {
+          resetPickedCards();
+          setIsDisabled(false);
+        }, 500);
       }
     } else {
-      // Hardcore
-      if (pickedCards.length >= 2 && pickedCards.length % 2 === 0) {
-        if (
-          pickedCards[pickedCards.length - 2].emoji ===
-          pickedCards[pickedCards.length - 1].emoji
-        ) {
-          setIsDisabled(false);
-        } else {
-          setTimeout(() => {
-            resetPickedCards();
-            setIsDisabled(false);
-          }, 500);
-        }
-      } else {
-        setIsDisabled(false);
-      }
+      setIsDisabled(false);
     }
   }, [gameMode, makePickedGuessed, pickedCards, resetPickedCards]);
 
