@@ -52,11 +52,18 @@
 }
 
 .new {
+  &Group {
+    &:not(:first-child) {
+      margin-top: 1.5em;
+    }
+  }
+
   &Message {
     margin-bottom: 0.5em;
+    text-align: center;
 
     @include media-xs {
-      margin-bottom: 1em;
+      margin-bottom: 0.8em;
     }
   }
 
@@ -64,7 +71,7 @@
     @include reset-list;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 4em);
+    grid-template-columns: repeat(5, 4em);
     justify-content: center;
     gap: 0.5em;
 
@@ -76,6 +83,12 @@
         width: 100%;
       }
     }
+  }
+
+  &DifficultyMessage {
+    font-size: 0.6em;
+    text-align: center;
+    margin-top: 1em;
   }
 }
 

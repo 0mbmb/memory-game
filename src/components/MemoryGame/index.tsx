@@ -3,8 +3,9 @@ import s from "./MemoryGame.module.scss";
 import useMemoryGame from "./useMemoryGame";
 import Overlay from "./components/Overlay";
 import Button from "./components/Button";
-// import Switch from "./components/Switch";
+import Switch from "./components/Switch";
 import "./styles.scss";
+import { IGameMode } from "./types";
 
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ const cardsNumberOptions = [
 
 const MemoryGame = () => {
   const [cardsNumber, setCardsNumber] = useState<number>(16);
+  const [gameMode, setGameMode] = useState(IGameMode.NORMAL);
   const [isNewGame, setIsNewGame] = useState(true);
 
   const { cards, onPickCard, isDisabled, isGameWon, resetGame, move } =
@@ -50,23 +52,43 @@ const MemoryGame = () => {
         }}
       >
         <Overlay isVisible={isNewGame}>
-          <p className={s.newMessage}>Choose field size:</p>
-          <ul className={s.newButtons}>
-            {cardsNumberOptions.map((option) => (
-              <li key={option}>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    onFieldSizeChoose(option);
-                  }}
-                >
-                  {option}
-                </Button>
-              </li>
-            ))}
-          </ul>
-          {/* <p className={s.newMessage}>Difficulty:</p>
-          <Switch leftText="Normal" rightText="Hardcore" /> */}
+          <div className={s.newGroup}>
+            <p className={s.newMessage}>Choose field size:</p>
+            <ul className={s.newButtons}>
+              {cardsNumberOptions.map((option) => (
+                <li key={option}>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      onFieldSizeChoose(option);
+                    }}
+                  >
+                    {option}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={s.newGroup}>
+            <p className={s.newMessage}>Difficulty:</p>
+            <Switch
+              leftText="Normal"
+              rightText="Hardcore"
+              checked={gameMode === IGameMode.HARDCORE}
+              onChange={() => {
+                setGameMode((mode) => {
+                  return mode === IGameMode.NORMAL
+                    ? IGameMode.HARDCORE
+                    : IGameMode.NORMAL;
+                });
+              }}
+            />
+            <p className={s.newDifficultyMessage}>
+              {gameMode === IGameMode.HARDCORE
+                ? "*Guess all cards in one go"
+                : "*Guessed card pairs stay uncovered"}
+            </p>
+          </div>
         </Overlay>
         <Overlay isVisible={isGameWon}>
           <p className={s.wonMessage}>You won in {move} moves!</p>

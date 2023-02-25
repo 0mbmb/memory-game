@@ -9,6 +9,12 @@
     color: var(--color-text-light);
     background-color: transparent;
     cursor: pointer;
+    transition: color 200ms ease;
+
+    &:hover,
+    &:focus {
+      color: var(--color-light-hover);
+    }
   }
 }
 
@@ -19,6 +25,9 @@
   border-radius: 1em;
   background-color: var(--color-text);
   display: flex;
+  margin: 0 var(--grid-step);
+
+  transition: background-color 200ms ease, border-color 200ms ease;
 
   input {
     display: none;
@@ -26,6 +35,16 @@
     &:checked + label::before {
       left: calc(100% - 0.4em);
       transform: translate(-100%, -50%);
+    }
+  }
+
+  &:hover,
+  &:focus {
+    border-color: var(--color-light-hover);
+    background-color: var(--color-dark-hover);
+
+    label::before {
+      background-color: var(--color-light-hover);
     }
   }
 
