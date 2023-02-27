@@ -1,0 +1,67 @@
+@mixin media-xxs {
+  @media (min-width: 375px) {
+    @content;
+  }
+}
+
+@mixin media-xs {
+  @media (min-width: 568px) {
+    @content;
+  }
+}
+
+@mixin media-s {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-m {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin media-l {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin reset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin grid-template-columns($cols, $media: "") {
+  @if $media == "xxs" {
+    &#{$cols} {
+      @include media-xxs {
+        grid-template-columns: repeat($cols, minmax(50px, 132px));
+      }
+    }
+  } @else if $media == "xs" {
+    &#{$cols} {
+      @include media-xs {
+        grid-template-columns: repeat($cols, minmax(50px, 132px));
+      }
+    }
+  } @else if $media == "s" {
+    &#{$cols} {
+      @include media-s {
+        grid-template-columns: repeat($cols, minmax(50px, 132px));
+      }
+    }
+  } @else if $media == "m" {
+    &#{$cols} {
+      @include media-m {
+        grid-template-columns: repeat($cols, minmax(50px, 132px));
+      }
+    }
+  } @else {
+    &#{$cols} {
+      grid-template-columns: repeat($cols, minmax(50px, 132px));
+    }
+  }
+}

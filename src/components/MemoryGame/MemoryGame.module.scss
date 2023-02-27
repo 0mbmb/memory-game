@@ -1,4 +1,10 @@
-@import "../../styles/mixins";
+@import "./styles/mixins";
+
+.memoryGameWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .controls {
   display: flex;
@@ -19,36 +25,33 @@
 
 .board {
   display: grid;
-  padding: calc(var(--grid-step) * 2);
-  gap: calc(var(--grid-step) * 2);
   background: var(--gradient-board);
   position: relative;
-  border-radius: calc(var(--grid-step) * 1);
+  border-radius: 0.7em;
+  padding: 0.5em;
+  gap: 0.5em;
   overflow: hidden;
 
+  @include media-xxs {
+    border-radius: 1em;
+    padding: 0.6em;
+    gap: 0.6em;
+  }
+
   @include media-xs {
-    padding: calc(var(--grid-step) * 3);
-    gap: calc(var(--grid-step) * 3);
-    border-radius: calc(var(--grid-step) * 2);
+    border-radius: 1em;
+    padding: 0.8em;
+    gap: 0.8em;
   }
 
-  @include media-s {
-    padding: calc(var(--grid-step) * 4);
-    gap: calc(var(--grid-step) * 4);
-    border-radius: calc(var(--grid-step) * 3);
-  }
-
-  @include media-m {
-    padding: calc(var(--grid-step) * 7);
-    gap: calc(var(--grid-step) * 7);
-    border-radius: calc(var(--grid-step) * 4);
-  }
-
-  @include media-l {
-    padding: calc(var(--grid-step) * 9);
-    gap: calc(var(--grid-step) * 9);
-    border-radius: calc(var(--grid-step) * 5);
-  }
+  @include grid-template-columns(3);
+  @include grid-template-columns(4);
+  @include grid-template-columns(5, "xxs");
+  @include grid-template-columns(6, "s");
+  @include grid-template-columns(7, "s");
+  @include grid-template-columns(8, "m");
+  @include grid-template-columns(9, "m");
+  @include grid-template-columns(10, "m");
 }
 
 .new {
