@@ -88,9 +88,13 @@
     @include reset-list;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 4em);
+    grid-template-columns: repeat(4, 4em);
     justify-content: center;
     gap: 0.5em;
+
+    @include media-xs {
+      grid-template-columns: repeat(5, 4em);
+    }
 
     li {
       display: flex;

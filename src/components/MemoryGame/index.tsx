@@ -50,6 +50,52 @@ const MemoryGame = () => {
   return (
     <div className={`memory-game-wrapper ${s.memoryGameWrapper}`}>
       <div>
+        <Overlay isVisible={isNewGame}>
+          <div className={s.newGroup}>
+            <p className={s.newMessage}>Choose field size:</p>
+            <ul className={s.newButtons}>
+              {cardsNumberOptions.map((option) => (
+                <li key={option}>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      onFieldSizeChoose(option);
+                    }}
+                  >
+                    {option}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={s.newGroup}>
+            <p className={s.newMessage}>Difficulty:</p>
+            <Switch
+              leftText="Normal"
+              rightText="Hardcore"
+              checked={gameMode === IGameMode.HARDCORE}
+              onChange={() => {
+                setGameMode((mode) => {
+                  return mode === IGameMode.NORMAL
+                    ? IGameMode.HARDCORE
+                    : IGameMode.NORMAL;
+                });
+              }}
+            />
+            <p className={s.newDifficultyMessage}>
+              {gameMode === IGameMode.HARDCORE
+                ? "*Guess all cards in one go"
+                : "*Guessed card pairs stay uncovered"}
+            </p>
+          </div>
+        </Overlay>
+        <Overlay isVisible={isGameWon}>
+          <p className={s.wonMessage}>You won in {move} moves!</p>
+          <div className={s.wonButtons}>
+            <Button onClick={onNewGame}>New game</Button>
+            <Button onClick={resetGame}>Reset</Button>
+          </div>
+        </Overlay>
         <div className={s.controls}>
           <p>Move: {move}</p>
           <div className={s.controlsButtons}>
@@ -68,52 +114,6 @@ const MemoryGame = () => {
             })
             .join(" ")}`}
         >
-          <Overlay isVisible={isNewGame}>
-            <div className={s.newGroup}>
-              <p className={s.newMessage}>Choose field size:</p>
-              <ul className={s.newButtons}>
-                {cardsNumberOptions.map((option) => (
-                  <li key={option}>
-                    <Button
-                      type="button"
-                      onClick={() => {
-                        onFieldSizeChoose(option);
-                      }}
-                    >
-                      {option}
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={s.newGroup}>
-              <p className={s.newMessage}>Difficulty:</p>
-              <Switch
-                leftText="Normal"
-                rightText="Hardcore"
-                checked={gameMode === IGameMode.HARDCORE}
-                onChange={() => {
-                  setGameMode((mode) => {
-                    return mode === IGameMode.NORMAL
-                      ? IGameMode.HARDCORE
-                      : IGameMode.NORMAL;
-                  });
-                }}
-              />
-              <p className={s.newDifficultyMessage}>
-                {gameMode === IGameMode.HARDCORE
-                  ? "*Guess all cards in one go"
-                  : "*Guessed card pairs stay uncovered"}
-              </p>
-            </div>
-          </Overlay>
-          <Overlay isVisible={isGameWon}>
-            <p className={s.wonMessage}>You won in {move} moves!</p>
-            <div className={s.wonButtons}>
-              <Button onClick={onNewGame}>New game</Button>
-              <Button onClick={resetGame}>Reset</Button>
-            </div>
-          </Overlay>
           {cards.map(({ emoji, isGuessed, isPicked }, index) => (
             <Card
               key={`${emoji}-${index}`}
