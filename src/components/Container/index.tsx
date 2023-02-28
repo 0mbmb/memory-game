@@ -1,12 +1,17 @@
 import s from "./Container.module.scss";
-import { ReactNode } from "react";
+import { ComponentPropsWithoutRef, ReactNode } from "react";
 
-interface ContainerProps {
+interface ContainerProps extends ComponentPropsWithoutRef<"div"> {
   children?: ReactNode;
+  className?: string;
 }
 
-const Container = ({ children }: ContainerProps) => {
-  return <div className={s.container}>{children}</div>;
+const Container = ({ children, className }: ContainerProps) => {
+  return (
+    <div className={`${s.container}${className ? ` ${className}` : ""}`}>
+      {children}
+    </div>
+  );
 };
 
 export default Container;

@@ -4,6 +4,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding: calc(var(--grid-step) * 3) 0;
+
+  @include media-s {
+    padding: calc(var(--grid-step) * 4) 0;
+  }
+
+  @include media-m {
+    padding: calc(var(--grid-step) * 5) 0;
+  }
+
+  @include media-l {
+    padding: calc(var(--grid-step) * 6) 0;
+  }
 }
 
 .controls {

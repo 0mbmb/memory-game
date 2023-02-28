@@ -1,11 +1,11 @@
-import "./App.scss";
+import s from "./App.module.scss";
 import MemoryGame from "./components/MemoryGame";
 import Container from "./components/Container";
 
 function App() {
   return (
-    <div className="App">
-      <Container>
+    <div className={s.app}>
+      <Container className={s.container}>
         <MemoryGame />
       </Container>
     </div>
