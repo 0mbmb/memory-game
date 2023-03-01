@@ -20,11 +20,13 @@ const Card = ({
   return (
     <CSSTransition
       in={isPicked || isGuessed}
-      timeout={200}
+      timeout={1000}
       classNames={{
         enter: s.enter,
+        enterActive: s.enterActive,
         enterDone: s.enterDone,
         exit: s.exit,
+        exitActive: s.exitActive,
         exitDone: s.exitDone,
       }}
       onEntered={() => {
@@ -40,7 +42,8 @@ const Card = ({
         onClick={onPickCard}
         disabled={isGuessed || isPicked || isDisabled || isAnimating}
       >
-        <span>{emoji}</span>
+        <span className={`${s.cardCover} cover`}></span>
+        <span className={`${s.cardEmoji} emoji`}>{emoji}</span>
       </button>
     </CSSTransition>
   );
