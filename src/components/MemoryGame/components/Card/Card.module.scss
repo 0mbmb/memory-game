@@ -6,27 +6,27 @@
   border: none;
   aspect-ratio: 1 / 1;
   padding: 0;
-  transition: transform 200ms ease;
-  border-radius: 0.7em;
-  overflow: hidden;
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+  border-radius: 50%;
 
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 
-  @include media-xxs {
-    border-radius: 1em;
-  }
-
   &:disabled {
     cursor: not-allowed;
   }
 
-  &:not(:disabled) {
-    &:hover,
-    &:focus {
-      transform: scale(1.03);
+  @media (hover: hover) {
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        span:first-child {
+          transform: scale(1.03);
+          transition: transform var(--animation-card) ease;
+          background-color: var(--color-dark-hover);
+        }
+      }
     }
   }
 
@@ -38,16 +38,21 @@
     grid-row: 1 / -1;
     backface-visibility: hidden;
 
+    overflow: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+    border-radius: 50%;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
-    font-size: 2.5em;
+    font-size: 2em;
     @include media-xxs {
-      font-size: 3em;
+      font-size: 2.5em;
     }
     @include media-xs {
-      font-size: 3.5em;
+      font-size: 3em;
     }
   }
 
@@ -71,32 +76,21 @@
   }
 
   &Active {
-    // :global {
-    //   .cover {
-    //     transform: rotateY(180deg);
-    //     transition: transform 0.2s linear;
-    //   }
-    // }
-
-    // .cardCover {
-    //   transform: rotateY(180deg);
+    // TODO:
+    // .cardEmoji {
+    //   transform: rotateY(0deg);
     //   transition: transform 0.2s linear;
     // }
 
     span:first-child {
       transform: rotateY(180deg);
-      transition: transform 1s linear;
+      transition: transform var(--animation-card) linear;
     }
 
     span:last-child {
       transform: rotateY(0deg);
-      transition: transform 1s linear;
+      transition: transform var(--animation-card) linear;
     }
-
-    // .cardEmoji {
-    //   transform: rotateY(0deg);
-    //   transition: transform 0.2s linear;
-    // }
   }
 
   &Done {
@@ -122,12 +116,12 @@
   &Active {
     span:first-child {
       transform: rotateY(0deg);
-      transition: transform 0.2s linear;
+      transition: transform var(--animation-card) linear;
     }
 
     span:last-child {
       transform: rotateY(180deg);
-      transition: transform 0.2s linear;
+      transition: transform var(--animation-card) linear;
     }
 
     &Done {

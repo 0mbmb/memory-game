@@ -20,7 +20,7 @@ const Card = ({
   return (
     <CSSTransition
       in={isPicked || isGuessed}
-      timeout={1000}
+      timeout={200}
       classNames={{
         enter: s.enter,
         enterActive: s.enterActive,
