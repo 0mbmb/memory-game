@@ -23,7 +23,6 @@
       &:focus {
         span:first-child {
           transform: scale(1.03);
-          transition: transform var(--animation-card) ease;
           background-color: var(--color-dark-hover);
         }
       }
@@ -58,6 +57,8 @@
 
   &Cover {
     background-color: var(--color-card-cover);
+    transition: transform var(--animation-card) ease,
+      background-color var(--animation-card) ease;
   }
 
   &Emoji {
