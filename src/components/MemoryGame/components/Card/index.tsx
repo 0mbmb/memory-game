@@ -42,8 +42,8 @@ const Card = ({
         onClick={onPickCard}
         disabled={isGuessed || isPicked || isDisabled || isAnimating}
       >
-        <span className={`${s.cardCover} cover`}></span>
-        <span className={`${s.cardEmoji} emoji`}>{emoji}</span>
+        <span className={s.cardCover}></span>
+        <span className={s.cardEmoji}>{emoji}</span>
       </button>
     </CSSTransition>
   );

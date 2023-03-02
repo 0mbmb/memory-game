@@ -68,69 +68,63 @@
 }
 
 .enter {
-  span:first-child {
+  .cardCover {
     transform: rotateY(0deg);
   }
 
-  span:last-child {
+  .cardEmoji {
     transform: rotateY(180deg);
   }
 
   &Active {
-    // TODO:
-    // .cardEmoji {
-    //   transform: rotateY(0deg);
-    //   transition: transform 0.2s linear;
-    // }
-
-    span:first-child {
+    .cardCover {
       transform: rotateY(180deg);
       transition: transform var(--animation-card) linear;
     }
 
-    span:last-child {
+    .cardEmoji {
       transform: rotateY(0deg);
       transition: transform var(--animation-card) linear;
     }
   }
 
   &Done {
-    span:first-child {
+    .cardCover {
       transform: rotateY(180deg);
     }
 
-    span:last-child {
+    .cardEmoji {
       transform: rotateY(0deg);
     }
   }
 }
 
 .exit {
-  span:first-child {
+  .cardCover {
     transform: rotateY(180deg);
   }
 
-  span:last-child {
+  .cardEmoji {
     transform: rotateY(0deg);
   }
 
   &Active {
-    span:first-child {
+    .cardCover {
       transform: rotateY(0deg);
       transition: transform var(--animation-card) linear;
     }
 
-    span:last-child {
+    .cardEmoji {
       transform: rotateY(180deg);
       transition: transform var(--animation-card) linear;
     }
 
     &Done {
-      span:first-child {
+      .cardCover {
         transform: rotateY(0deg);
       }
 
-      span:last-child {
+      .cardEmoji {
         transform: rotateY(180deg);
       }
     }
