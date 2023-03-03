@@ -73,13 +73,9 @@ const MemoryGame = () => {
             <Switch
               leftText="Normal"
               rightText="Hardcore"
-              checked={gameMode === IGameMode.HARDCORE}
-              onChange={() => {
-                setGameMode((mode) => {
-                  return mode === IGameMode.NORMAL
-                    ? IGameMode.HARDCORE
-                    : IGameMode.NORMAL;
-                });
+              isChecked={gameMode === IGameMode.HARDCORE}
+              setIsChecked={(isChecked) => {
+                setGameMode(isChecked ? IGameMode.HARDCORE : IGameMode.NORMAL);
               }}
             />
             <p className={s.newDifficultyMessage}>
